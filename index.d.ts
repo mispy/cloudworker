@@ -24,6 +24,15 @@ declare class KeyValueStore {
   get (key: string, type?: ValidType): Promise<string | ArrayBuffer | Object | ReadableStream>
   put (key: string, value: string | ReadableStream | ArrayBuffer | FormData): Promise<undefined>
   delete (key: string): Promise<undefined>
+  list(options: {
+    prefix?: string
+    limit?: number
+    cursor?: string
+  }): Promise<{
+    keys: { name: string; expiration?: number }[]
+    list_complete: boolean
+    cursor: string
+  }>
 }
 
 declare namespace Cloudworker {
